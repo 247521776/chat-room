@@ -1,0 +1,23 @@
+{
+  "name": "chat-room",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/247521776/chat-room.git"
+  },
+  "keywords": [
+    "express",
+    "socket"
+  ],
+  "author": "boom",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/247521776/chat-room/issues"
+  },
+  "homepage": "https://github.com/247521776/chat-room#readme"
+}
