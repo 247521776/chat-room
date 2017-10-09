@@ -1,7 +1,7 @@
 {
   "name": "chat-room",
   "version": "1.0.0",
-  "description": "",
+  "description": "本项目为一个简易聊天室",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
