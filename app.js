@@ -13,6 +13,10 @@ const manage        = require(rootname + "/manage");
 
 app.use(express.static(`${__dirname}/view`));
 
+app.use((req, res) => {
+    res.render("index.html");
+})
+
 server.listen(port, () => {
     console.log("Server running port: " + port);
 });
