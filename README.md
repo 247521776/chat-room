@@ -4,4 +4,4 @@
 
 -  express
 -  socket.io
--  redis
+-  ioredis
