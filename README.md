@@ -8,9 +8,9 @@
 
 ## 配置文件 
 
-|- config  
+```|- config  
      |- default.json 项目默认配置信息  
-     |- redis.json redis配置信息  
+     |- redis.json redis配置信息  ```
   
 ### default.json
 
