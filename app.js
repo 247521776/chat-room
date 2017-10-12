@@ -14,7 +14,12 @@ const manage        = require(rootname + "/manage");
 app.use(express.static(`${__dirname}/view`));
 
 app.use((req, res) => {
-    res.render("index.html");
+    if (req.url.length < 2) {
+        res.render("index.html");        
+    }
+    else {
+        res.json("恭喜你进入了聊天室");
+    }
 })
 
 server.listen(port, () => {
