@@ -180,15 +180,18 @@ $(document).ready(function(e) {
 	$("#message").keydown(function(event){
 		var e = window.event || event;
         var k = e.keyCode || e.which || e.charCode;
+    var msg = $("#message").val();
     //是否为enter
     var isEnter = k == 13 || k == 10;
     //是否为ctrl
     var isCtrl = event.ctrlKey;
     //按下ctrl+enter为回车
+    if(isEnter && isCtrl) {
+      $("#message").val() = msg + "\n";
+    }
 		//按下enter发送消息
 		if(isEnter && !isCtrl){
-      var msg = $("#message").val().trim();
-      if (msg.length > 0) {
+      if (msg.trim().length > 0) {
         sendMessage(event, fromname, to_uid, to_uname);
       }
 		}
