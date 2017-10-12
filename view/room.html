@@ -188,7 +188,7 @@ function loginAfter() {
     /*按下按钮或键盘按键*/
     $("#message").keydown(function(event){
         var e = window.event || event;
-            var k = e.keyCode || e.which || e.charCode;
+        var k = e.keyCode || e.which || e.charCode;
         var msg = $("#message").val();
         //是否为enter
         var isEnter = k == 13 || k == 10;
@@ -196,24 +196,25 @@ function loginAfter() {
         var isCtrl = event.ctrlKey;
         //按下ctrl+enter为回车
         if(isEnter && isCtrl) {
-        $("#message").val(msg + "\n");
+            $("#message").val(msg + "\n");
         }
         //按下enter发送消息
         if(isEnter && !isCtrl){
-        if (msg.trim().length > 0) {
-            sendMessage(event, fromname, to_uid, to_uname);
-        }
+            if (msg.trim().length > 0) {
+                e.preventDefault();
+                sendMessage(event, fromname, to_uid, to_uname);
+            }
         }
     });
     function sendMessage(event, from_name, to_uid, to_uname){
         var eventName = "send all massage";
         var massage = {
-        fromUser: socket.id,
-        massage: $("#message").val()
+            fromUser: socket.id,
+            massage: $("#message").val()
         };
         if (to_uid != "0") {
-        eventName = "send massage";
-        massage.toUser = to_uid;
+            eventName = "send massage";
+            massage.toUser = to_uid;
         }
         socket.emit(eventName, massage);
         addMassage(...arguments);
