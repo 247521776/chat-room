@@ -156,7 +156,9 @@ $(document).ready(function(e) {
   }
 	
 	$('.sub_but').click(function(event){
-	    sendMessage(event, fromname, to_uid, to_uname);
+    if (msg.length > 0) {
+        sendMessage(event, fromname, to_uid, to_uname);
+      }
 	});
   
   //添加聊天信息
