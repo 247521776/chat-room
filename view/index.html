@@ -156,6 +156,7 @@ $(document).ready(function(e) {
   }
 	
 	$('.sub_but').click(function(event){
+    var msg = $("#message").val().trim();
     if (msg.length > 0) {
         sendMessage(event, fromname, to_uid, to_uname);
       }
