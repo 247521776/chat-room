@@ -179,6 +179,7 @@ $(document).ready(function(e) {
         var k = e.keyCode || e.which || e.charCode;
 		//按下ctrl+enter发送消息
 		if((event.ctrlKey && (k == 13 || k == 10) )){
+      console.log("====");
 			sendMessage(event, fromname, to_uid, to_uname);
 		}
   });
