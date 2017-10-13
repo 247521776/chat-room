@@ -175,7 +175,8 @@ function loginAfter() {
     //添加聊天信息
     function receiveMessage(massage) {
         const fromUser = users[massage.fromUser] || massage.robot;
-        var dev = `<div class="msg_item msg_item_order msg_order fn-clear">
+        var dev = `<div class="time">${moment(Date.now()).format("HH:mm")}</div>
+        <div class="msg_item msg_item_order msg_order fn-clear">
             <div class="uface oface"><img src="${fromUser.image}" width="40" height="40"  alt=""/></div>
             <div class="item_left">
             <div class="msg">${massage.massage}</div>
@@ -226,11 +227,12 @@ function loginAfter() {
         if(to_uname != '' && to_uid != "0"){
             msg = '您对 ' + to_uname + ' 说： ' + msg;
         }
-        var htmlData =   `<div class="msg_item msg_item_me msg_me fn-clear">
+        var htmlData = `<div class="time">${moment(Date.now()).format("HH:mm")}</div>
+        <div class="msg_item msg_item_me msg_me fn-clear">
             <div class="uface iface"><img src="${image}" width="40" height="40"  alt=""/></div>
             <div class="item_right">
             <div class="msg own"> ${msg} </div>
-            <div class="name_time">${moment(Date.now()).format("HH:mm")}   ${from_name} </div>
+            <div class="name_time">${from_name} </div>
             </div>
         </div>`;
         $("#message_box").append(htmlData);
