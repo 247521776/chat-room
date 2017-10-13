@@ -11,6 +11,18 @@ for (let filename of files) {
 }
 //当有人离开
 exports.disconnect = (io, socket) => {
+    const username = socket.username;
+    try {
+        redis.pipeline([
+            ["hdel", "users", username],
+            ["hdel", username, "id"],
+            ["hdel", username, "username"],
+            ["hdel", username, "image"]
+        ]).exec(() => {});
+    }
+    catch(err) {
+        
+    }
     socket.broadcast.emit("left user", {
         code: 200,
         fromUser: {

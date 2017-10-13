@@ -14,14 +14,14 @@ module.exports = {
                 msg: "缺少用户信息"
             });
         }
+        const redisCommand = [];
         try{
-            // const userCount = redis.incr("usersCount");
-            // user.id = userCount;
-            // redis.hmset("users", username, userCount);
-            // redis.hmset(username, user);
+            const id = socket.id;
+            redisCommand.push(["hmset", "users", username, id]);
+            user.id = id;
+            redisCommand.push(["hmset", username, user]);
             socket.username = username;
             socket.image = image;
-            user.id = socket.id;
             const users = {};
             for (let id in io.sockets.sockets) {
                 users[id] = {
@@ -29,19 +29,21 @@ module.exports = {
                     image: io.sockets.sockets[id].image
                 }
             }
-            socket.emit("add user", {
-                code: 200,
-                msg: "添加用户成功",
-                users
-            });
-            socket.broadcast.emit("new user", {
-                code: 200,
-                fromUser: user
+            redis.pipeline([redisCommand]).exec(() => {
+                socket.emit("add user", {
+                    code: 200,
+                    msg: "添加用户成功",
+                    users
+                });
+                socket.broadcast.emit("new user", {
+                    code: 200,
+                    fromUser: user
+                });
             });
         }
         catch(err) {
             socket.emit("add user", {
-                code: 400,
+                code: 500,
                 msg: "添加用户失败"
             });
         }
