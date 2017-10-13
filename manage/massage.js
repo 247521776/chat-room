@@ -37,6 +37,11 @@ module.exports = {
                             robot: socket.robot,
                             massage: data.text
                         });
+
+                        socket.broadcast.emit("send all massage", {
+                            robot: socket.robot,
+                            massage: data.text
+                        });
                     }
                 });
             }
