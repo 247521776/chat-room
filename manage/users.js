@@ -1,5 +1,3 @@
-const faker = require("faker");
-
 module.exports = {
     "add user"(io, socket, user) {
         if (!user) {
@@ -16,10 +14,6 @@ module.exports = {
                 msg: "缺少用户信息"
             });
         }
-        socket.robot = {
-            username: faker.name.findName(),
-            image: faker.image.avatar()
-        };
         const redisCommand = [];
         const sockets = io.sockets.sockets;
         try{

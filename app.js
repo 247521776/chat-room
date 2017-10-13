@@ -10,6 +10,7 @@ const port          = config.port || 3000;
 global.rootname     = __dirname;
 global.redis        = new redis(configRedis);
 const manage        = require(rootname + "/manage");
+const faker         = require("faker");
 
 app.use(express.static(`${__dirname}/view`));
 
@@ -27,6 +28,10 @@ server.listen(port, () => {
 });
 
 io.on("connection", (socket) => {
+    socket.robot = {
+        username: faker.name.findName(),
+        image: faker.image.avatar()
+    };
     for(let eventName in manage) {
         socket.on(eventName, (massage) => {
             manage[eventName](io, socket, massage);
