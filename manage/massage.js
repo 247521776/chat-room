@@ -33,12 +33,7 @@ module.exports = {
                 }, (err, res, body) => {
                     const data = JSON.parse(body);
                     if(!err) {
-                        socket.emit("send massage", {
-                            robot: socket.robot,
-                            massage: data.text
-                        });
-
-                        socket.broadcast.emit("send all massage", {
+                        io.sockets.emit("send massage", {
                             robot: socket.robot,
                             massage: data.text
                         });
