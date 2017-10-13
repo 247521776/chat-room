@@ -16,15 +16,13 @@ module.exports = {
                 msg: "缺少用户信息"
             });
         }
+        socket.robot = {
+            username: faker.name.findName(),
+            image: faker.image.avatar()
+        };
         const redisCommand = [];
         const sockets = io.sockets.sockets;
         try{
-            if (Object.keys(sockets).length === 1) {
-                socket.robot = {
-                    username: faker.name.findName(),
-                    image: faker.image.avatar()
-                };
-            }
             const id = socket.id;
             redisCommand.push(["hmset", "users", username, id]);
             user.id = id;
