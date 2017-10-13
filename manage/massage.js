@@ -1,5 +1,9 @@
 const request = require("request");
-const tuling = require(`${rootname}/config/tuling.json`);
+const fs      = require("fs");
+let   tuling;
+if (fs.existsSync(`${rootname}/config/tuling.json`)) {
+    tuling = require(`${rootname}/config/tuling.json`);
+}
 
 module.exports = {
     "send massage"(io, socket, massage) {
