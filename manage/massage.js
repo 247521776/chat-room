@@ -22,7 +22,7 @@ module.exports = {
     "send all massage"(io, socket, massage) {
         if (tuling) {
             const sockets = io.sockets.sockets;
-            if (Object.keys(sockets).length === 1) {
+            if (massage.massage.indexOf("@机器人") != -1) {
                 request.post({
                     url: "http://www.tuling123.com/openapi/api",
                     form: {
@@ -40,9 +40,7 @@ module.exports = {
                     }
                 });
             }
-            else {
-                broadcast();
-            }
+            broadcast();
         }
         else {
             broadcast();
