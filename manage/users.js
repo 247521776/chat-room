@@ -1,3 +1,5 @@
+const faker = require("faker");
+
 module.exports = {
     "add user"(io, socket, user) {
         if (!user) {
@@ -15,7 +17,14 @@ module.exports = {
             });
         }
         const redisCommand = [];
+        const sockets = io.sockets.sockets;
         try{
+            if (Object.keys(sockets).length === 1) {
+                socket.robot = {
+                    username: faker.name.findName(),
+                    image: faker.image.avatar()
+                };
+            }
             const id = socket.id;
             redisCommand.push(["hmset", "users", username, id]);
             user.id = id;
@@ -23,13 +32,13 @@ module.exports = {
             socket.username = username;
             socket.image = image;
             const users = {};
-            for (let id in io.sockets.sockets) {
+            for (let id in sockets) {
                 users[id] = {
-                    username: io.sockets.sockets[id].username,
-                    image: io.sockets.sockets[id].image
+                    username: sockets[id].username,
+                    image: sockets[id].image
                 }
             }
-            redis.pipeline([redisCommand]).exec(() => {
+            redis.pipeline(redisCommand).exec(() => {
                 socket.emit("add user", {
                     code: 200,
                     msg: "添加用户成功",
@@ -42,6 +51,7 @@ module.exports = {
             });
         }
         catch(err) {
+            console.log(err);
             socket.emit("add user", {
                 code: 500,
                 msg: "添加用户失败"

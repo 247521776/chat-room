@@ -1,3 +1,6 @@
+const request = require("request");
+const tuling = require(`${rootname}/config/tuling.json`);
+
 module.exports = {
     "send massage"(io, socket, massage) {
         const toUser = massage.toUser;
@@ -13,10 +16,40 @@ module.exports = {
         });
     },
     "send all massage"(io, socket, massage) {
-        socket.broadcast.emit("send all massage", {
-            code: 200,
-            fromUser: socket.id,
-            massage: massage.massage
-        });
+        if (tuling) {
+            const sockets = io.sockets.sockets;
+            if (Object.keys(sockets).length === 1) {
+                request.post({
+                    url: "http://www.tuling123.com/openapi/api",
+                    form: {
+                        key: tuling.APIkey,
+                        info: massage.massage,
+                        userid: socket.username
+                    }
+                }, (err, res, body) => {
+                    const data = JSON.parse(body);
+                    if(!err) {
+                        socket.emit("send massage", {
+                            robot: socket.robot,
+                            massage: data.text
+                        });
+                    }
+                });
+            }
+            else {
+                broadcast();
+            }
+        }
+        else {
+            broadcast();
+        }
+
+        function broadcast() {
+            socket.broadcast.emit("send all massage", {
+                code: 200,
+                fromUser: socket.id,
+                massage: massage.massage
+            });
+        }
     }
 };

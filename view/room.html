@@ -173,7 +173,7 @@ function loginAfter() {
 
     //添加聊天信息
     function receiveMessage(massage) {
-        const fromUser = users[massage.fromUser];
+        const fromUser = users[massage.fromUser] || massage.robot;
         var dev = `<div class="msg_item msg_item_order msg_order fn-clear">
             <div class="uface oface"><img src="${fromUser.image}" width="40" height="40"  alt=""/></div>
             <div class="item_left">
