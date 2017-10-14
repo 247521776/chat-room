@@ -20,9 +20,7 @@ exports.disconnect = (io, socket) => {
             ["hdel", username, "image"]
         ]).exec(() => {});
     }
-    catch(err) {
-        
-    }
+    catch(err) {}
     socket.broadcast.emit("left user", {
         code: 200,
         fromUser: {
