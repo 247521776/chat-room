@@ -53,6 +53,6 @@ module.exports = {
     //重新连接
     "reconnect user"(io, socket, user) {
         socket.username = user.username;
-        socket.iamge = user.image;
+        socket.image = user.image;
     }
 };
