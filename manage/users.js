@@ -49,5 +49,10 @@ module.exports = {
                 msg: "添加用户失败"
             });
         }
+    },
+    //重新连接
+    "reconnect user"(io, socket, user) {
+        socket.username = user.username;
+        socket.iamge = user.iamge;
     }
 };

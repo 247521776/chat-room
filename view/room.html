@@ -83,7 +83,7 @@ function loginAfter() {
     $(".username").append(`<div class="uface image"><img src="${image}" width="40" height="40"  alt=""/></div>`);
     var users = {};
     socket.on("connect", () => {
-        socket.emit("reconnect", {
+        socket.emit("reconnect user", {
             username,
             image
         });
