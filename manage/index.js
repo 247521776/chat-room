@@ -27,4 +27,10 @@ exports.disconnect = (io, socket) => {
             id: socket.id
         }
     });
+};
+
+//重新连接
+exports.reconnect = (io, socket, user) => {
+    socket.username = user.username;
+    socket.iamge = user.iamge;
 }

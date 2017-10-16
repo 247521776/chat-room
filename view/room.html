@@ -82,6 +82,12 @@ function loginAfter() {
     var image = localStorage.image || faker.image.avatar();
     $(".username").append(`<div class="uface image"><img src="${image}" width="40" height="40"  alt=""/></div>`);
     var users = {};
+    socket.on("connect", () => {
+        socket.emit("reconnect", {
+            username,
+            image
+        });
+    });
     //登录
     socket.emit("add user", {
         username,
