@@ -11,6 +11,11 @@ global.rootname     = __dirname;
 global.redis        = new redis(configRedis);
 const manage        = require(rootname + "/manage");
 const faker         = require("faker");
+//机器人名称与头像
+const robot         = {
+    username: faker.name.findName(),
+    image: faker.image.avatar()
+};
 
 app.use(express.static(`${__dirname}/view`));
 
@@ -28,10 +33,7 @@ server.listen(port, () => {
 });
 
 io.on("connection", (socket) => {
-    socket.robot = {
-        username: faker.name.findName(),
-        image: faker.image.avatar()
-    };
+    socket.robot = robot;
     for(let eventName in manage) {
         socket.on(eventName, (massage) => {
             manage[eventName](io, socket, massage);
